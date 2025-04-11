@@ -5,8 +5,8 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'tasks',views.TaskView,'tasks')
+#Esto genera automáticamente todas las rutas necesarias para que esa vista funcione.
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('api/',include(router.urls()))
 ]

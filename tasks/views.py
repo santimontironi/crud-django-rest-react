@@ -6,3 +6,5 @@ from .models import Task
 class TaskView(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     tasks = Task.objects.all()
+    
+# La vista (TaskView) es una clase que maneja todo el CRUD.
