@@ -1,6 +1,17 @@
+import { useEffect } from "react"
+import { getAllTasks } from "../api/TaskApi"
+
 export const TaskList = () => {
     
-  return (
-    <div>TaskList</div>
-  )
+    useEffect(() => {
+        async function loadTasks(){
+            const res = await getAllTasks()
+            console.log(res)
+        }
+        loadTasks()
+    },[])
+
+    return (
+        <div>TaskList</div>
+    )
 }
