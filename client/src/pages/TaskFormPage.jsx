@@ -1,13 +1,17 @@
 import { useForm } from "react-hook-form"; //este hook da todas las herramientas para manejar un formulario de forma más sencilla, sin tener que usar useState para cada campo ni escribir validaciones a mano.
 import {sendTask} from "../api/TaskApi";
+import {useNavigate} from "react-router-dom";
 
 export const TaskFormPage = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm() //register conecta cada input al sistema de React Hook Form (sabe su valor, cuándo cambia, etc.)
 
+  const navigate = useNavigate()
+
   // Esta es la función que tiene handleSubmit como parámetro y es async porque necesita esperar la respuesta de la API después de enviar la tarea. Toda solicitud HTTP es asincrona.
   async function onSubmit(data) {
     await sendTask(data)
+    navigate('/tasks')
   }
 
   return (
