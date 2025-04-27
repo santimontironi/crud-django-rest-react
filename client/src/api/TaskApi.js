@@ -14,3 +14,7 @@ export const getAllTasks = () => {
 export const sendTask = (task) =>{
     return config.post('/',task)
 }
+
+export const deleteTask = (id) => {
+    return config.delete(`/${id}/`)
+}

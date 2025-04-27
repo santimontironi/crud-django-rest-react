@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"; //este hook da todas las herramientas para manejar un formulario de forma más sencilla, sin tener que usar useState para cada campo ni escribir validaciones a mano.
-import {sendTask} from "../api/TaskApi";
+import {sendTask, deleteTask} from "../api/TaskApi";
 import {useNavigate,useParams} from "react-router-dom";
 
 export const TaskFormPage = () => {
@@ -31,7 +31,13 @@ export const TaskFormPage = () => {
 
       {/* condicional para saber si la url tiene un id como parametro (lo va a tener cuando estemos en la ruta de cada tarea) */}
       {params.id &&(
-        <button>Delete</button>
+        <button onClick={async () => {
+          const accepted = window.confirm('Are you sure?')
+          if(accepted){
+            await deleteTask(params.id)
+            navigate('/tasks')
+          }
+        }}>Delete</button>
       )}
     </div>
   )
