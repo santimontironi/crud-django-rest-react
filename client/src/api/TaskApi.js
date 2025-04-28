@@ -11,10 +11,18 @@ export const getAllTasks = () => {
 }
 
 //funcion que realiza la petición post
-export const sendTask = (task) =>{
+export const createTask = (task) =>{
     return config.post('/',task)
 }
 
 export const deleteTask = (id) => {
     return config.delete(`/${id}/`)
+}
+
+export const getTask = (id) => {
+    return config.get(`/${id}/`)
+}
+
+export const putTask = (id,task) => {
+    return config.put(`/${id}/`,task)
 }
