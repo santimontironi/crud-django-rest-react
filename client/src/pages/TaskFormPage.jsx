@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"; //este hook da todas las herramientas
 import {createTask, deleteTask, putTask, getTask} from "../api/TaskApi";
 import {useNavigate,useParams} from "react-router-dom";
 import { useEffect } from "react";
+import {toast} from "react-hot-toast";
 
 export const TaskFormPage = () => {
 
@@ -25,8 +26,20 @@ export const TaskFormPage = () => {
   async function submitForm(data) { //data lo genera handleSubmit, es un objeto con los valores de los inputs registrados con register.
     if (params.id){
       await putTask(params.id,data)
+      toast.success("Task updated",{
+        style:{
+          background: "#392F5A",
+          color: "#fff"
+        }
+      })
     }else{
       await createTask(data)
+      toast.success("Task created",{
+        style:{
+          background: "#3E5622",
+          color: "#fff"
+        }
+      })
     }
     navigate('/tasks')
   }
@@ -52,6 +65,12 @@ export const TaskFormPage = () => {
           if(accepted){
             await deleteTask(params.id)
             navigate('/tasks')
+            toast.success("Task eliminated",{
+              style:{
+                background: "#D62828",
+                color: "#fff"
+              }
+            })
           }
         }}>Delete</button>
       )}
