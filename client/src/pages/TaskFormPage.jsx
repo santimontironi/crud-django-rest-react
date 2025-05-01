@@ -45,14 +45,18 @@ export const TaskFormPage = () => {
   }
 
   return (
-    <div>
+    <div className="max-w-xl mx-auto flex flex-col items-center justify-center">
         <form onSubmit={handleSubmit(submitForm)}>
-        <input type="text" placeholder="title" {...register("title", { required: true })} />
+        <input className="bg-zinc-700 p-3 rounded-lg w-full mb-3" type="text" placeholder="title" {...register("title", { required: true })} />
         {errors.title && (
           <p>This title is required</p>
         )}
-        <textarea rows="3" placeholder="Description" {...register("description", { required: true })}></textarea>
-        <button>Save</button>
+        <textarea className="bg-zinc-700 p-3 rounded-lg w-full" rows="3" placeholder="Description" {...register("description", { required: true })}></textarea>
+        {params.id ? (
+          <button className="bg-blue-600 text-white p-3 rounded-lg mt-3 w-full hover:cursor-pointer hover:bg-blue-800 ">Update task</button>
+        ) : (
+          <button className="bg-green-600 text-white p-3 rounded-lg mt-3 w-full hover:cursor-pointer hover:bg-green-800">Add task</button>
+        )}
         {errors.description && (
           <p>This textarea is required</p>
         )}
@@ -60,7 +64,7 @@ export const TaskFormPage = () => {
 
       {/* condicional para saber si la url tiene un id como parametro (lo va a tener cuando estemos en la ruta de cada tarea) */}
       {params.id &&(
-        <button onClick={async () => {
+        <button className="bg-red-700 rounded-lg p-3 mt-3 hover:cursor-pointer hover:bg-red-600" onClick={async () => {
           const accepted = window.confirm('Are you sure?')
           if(accepted){
             await deleteTask(params.id)
